@@ -58,13 +58,13 @@ app.get('/stats/', (req, res) => {
 //----------------------------------------------------------------------------------------------
 
 const port = process.env.PORT||5000;
-// const url=process.env.CONNECTION_URL
+const url='mongodb+srv://Manan:lDpyefd0L73rWhnD@cluster0.ppwx9.mongodb.net/precilyBackend?retryWrites=true&w=majority'
 
 app.get('/', (req, res) => {
     res.send('hi') 
 })
 
-const CONNECTION_URL = 'mongodb+srv://Manan:lDpyefd0L73rWhnD@cluster0.ppwx9.mongodb.net/precilyBackend?retryWrites=true&w=majority'
+const CONNECTION_URL = url
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
