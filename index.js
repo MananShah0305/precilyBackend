@@ -8,7 +8,7 @@ import path from 'path'
 
 const __dirname = path.resolve()
 
-dotenv.config({ path: path.join(__dirname, '.env') })
+// dotenv.config({ path: path.join(__dirname, '.env') })
 const app = express()
 
 app.use(express.json({ extended: true, limit: '2mb' }))
@@ -61,7 +61,7 @@ app.get('/stats/', (req, res) => {
 //----------------------------------------------------------------------------------------------
 
 const port = process.env.PORT||5000;
-const url=process.env.MONGODB_URI||'mongodb+srv://Manan:lDpyefd0L73rWhnD@cluster0.ppwx9.mongodb.net/precilyBackend?retryWrites=true&w=majority'
+const url=process.env.MONGODB_URI
 
 app.get('/', (req, res) => {
     res.send('hi') 
