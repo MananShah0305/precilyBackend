@@ -4,8 +4,11 @@ import cors from 'cors'
 import boxRouter from './boxRoutes.js'
 import fs from 'fs'
 import dotenv from 'dotenv'
+import path from 'path'
 
-dotenv.config()
+const __dirname = path.resolve()
+
+dotenv.config({ path: path.join(__dirname, '.env') })
 const app = express()
 
 app.use(express.json({ extended: true, limit: '2mb' }))
@@ -57,22 +60,22 @@ app.get('/stats/', (req, res) => {
 
 //----------------------------------------------------------------------------------------------
 
-const port = process.env.PORT||5000;
-const url='mongodb+srv://Manan:lDpyefd0L73rWhnD@cluster0.ppwx9.mongodb.net/precilyBackend?retryWrites=true&w=majority'
+const port = process.env.PORT || 5000;
 
-app.get('/', (req, res) => {
-    res.send('hi') 
-})
+// const CONNECTION_URL = 'mongodb+srv://Manan:lDpyefd0L73rWhnD@cluster0.ppwx9.mongodb.net/precilyBackend?retryWrites=true&w=majority'
 
-const CONNECTION_URL = url
+mongoose.connect('mongodb+srv://Manan:lDpyefd0L73rWhnD@cluster0.ppwx9.mongodb.net/precilyBackend?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
 
-mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        app.listen(port, () => {
-            console.log('Server listening on port:', port)
-        })
-    })
-    .catch(err => console.log(err))
+if (process.env.NODE_ENV == 'production') {
+    app.use(express.static(path.join(__dirname, '/precily-frontend/build')))
+    app.get('*', (req,res) => {
+        console.log('index file served')
+        res.sendFile(path.join(__dirname, '/precily-frontend/build/index.html'))
+      })
+}
 
 app.use('/box', boxRouter)
 
+app.listen(port, () => {
+    console.log('Server listening on port:', port)
+})

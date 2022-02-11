@@ -1,1 +1,1 @@
-{"POST /box/ 200":21,"PATCH /box/:id 200":17,"GET /box/ 200":170,"GET /box/ 304":22,"GET unknown route 404":2,"GET / 200":1,"GET /box/all 200":1}
+{"POST /box/ 200":21,"PATCH /box/:id 200":17,"GET /box/ 200":171,"GET /box/ 304":22,"GET unknown route 404":4,"GET / 200":1,"GET /box/all 200":1}
